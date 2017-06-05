@@ -2,7 +2,7 @@
 
 namespace Injectable;
 
-trait Injectable
+trait BaseInjectable
 {
     public function __get($name)
     {
