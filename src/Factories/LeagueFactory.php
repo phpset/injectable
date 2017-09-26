@@ -4,7 +4,7 @@ namespace Injectable\Factories;
 
 class LeagueFactory
 {
-    public static function fromConfig(array $config)
+    public static function fromConfig(array $config, $arguments = null)
     {
         $container = new \League\Container\Container();
         foreach ($config as $name => $concrete) {
@@ -15,7 +15,10 @@ class LeagueFactory
                 $value = $value[0];
             }
 
-            $container->add($name, $concrete, $shared);
+            $res = $container->add($name, $concrete, $shared);
+            if ($res && $arguments) {
+                $res->withArguments($arguments);
+            }
         }
         return $container;
     }
