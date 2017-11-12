@@ -4,20 +4,25 @@ Injectable magic trait for Service Locator access
 ```php
 // Create config: key -> value/callable/any
 $config = [
-    'some' => new ArrayIterator([]),
+    'service1' => new ArrayIterator([]),
+    'cache' => new Memcache(),
 ];
 
-// Set up Container
+// Init container via Injectable
 $container = \Injectable\Factories\LeagueFactory::fromConfig($config);
 \Injectable\ContainerSingleton::setContainer($container);
 
-// Use in yours classes via magic
+// Add to your class trait BaseInjectable
 class Simple
 {
     use \Injectable\BaseInjectable;
+    
+    public function someLogic () {
+        // Access to services via magic
+        // $this->cache -> Memcache instance
+        $this->cache->set('key', 'value');
+    }
 }
-$simple = new Simple();
-$simple->some->count();
 ```
 
 ## Keywords
