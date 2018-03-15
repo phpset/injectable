@@ -1,6 +1,11 @@
 # Injectable
 Injectable magic trait for Service Locator access
 
+## Installation
+```shell
+composer require phpset/injectable
+```
+## Using
 ```php
 // Create config: key -> value/callable/any
 $config = [
