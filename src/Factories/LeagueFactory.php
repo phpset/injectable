@@ -2,22 +2,17 @@
 
 namespace Injectable\Factories;
 
+use Psr\Container\ContainerInterface;
+
 class LeagueFactory
 {
-    public static function fromConfig(array $config, $arguments = null)
+    public static function fromConfig(array $config, $arguments = null): ContainerInterface
     {
         $container = new \League\Container\Container();
         foreach ($config as $name => $concrete) {
-            $shared = true;
-
-            if (is_array($concrete)) {
-                $shared = isset($value[1]) ?: true;
-                $value = $value[0];
-            }
-
-            $res = $container->add($name, $concrete, $shared);
+            $res = $container->add($name, $concrete, true);
             if ($res && $arguments) {
-                $res->withArguments($arguments);
+                $res->addArguments($arguments);
             }
         }
         return $container;
